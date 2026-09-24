@@ -20,13 +20,20 @@ const MyPlanPage = () => {
                     <p className='text-[36px]'>0</p>
                 </div>
             </div>
-            <div>
-                <div>
-                    <Link href='/'>Today`s Plan</Link>
-                    <Link href='/'>Saved</Link>
+            <div className=''>
+                 
+                <div className="tabs tabs-border">
+                    <input type="radio" name="my_tabs_2" className="tab" aria-label="Today's Plan" />
+                    <div className="tab-content border-base-300 bg-base-100 p-10">Tab content 1</div>
+
+                    <input type="radio" name="my_tabs_2" className="tab" aria-label="Saved" defaultChecked />
+                    <div className="tab-content border-base-300 bg-base-100 p-10">Tab content 2</div>
+                    
+
+                   
                 </div>
                 <div>
-                    
+                    <h2 className='text-[12px] text-[#8A92A0] '>Sort By</h2>
                 </div>
             </div>
 
