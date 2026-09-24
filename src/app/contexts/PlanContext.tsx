@@ -1,31 +1,39 @@
 "use client";
 
-
+import { IWorkout } from "@/app/types/type";
 import {
   createContext,
-  Dispatch,
   ReactNode,
-  SetStateAction,
   useContext,
   useState,
 } from "react";
-import { IWorkout } from "../types/type";
 
 interface PlanContextType {
   plan: IWorkout[];
-  setPlan: Dispatch<SetStateAction<IWorkout[]>>;
+  saved: IWorkout[];
+
   addToPlan: (workout: IWorkout) => void;
   removeFromPlan: (id: number) => void;
+
+  addToSaved: (workout: IWorkout) => void;
+  removeFromSaved: (id: number) => void;
 }
 
-const PlanContext = createContext<PlanContextType | undefined>(undefined);
+const PlanContext = createContext<PlanContextType | undefined>(
+  undefined
+);
 
-export const PlanProvider = ({ children }: { children: ReactNode }) => {
+export const PlanProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
   const [plan, setPlan] = useState<IWorkout[]>([]);
+  const [saved, setSaved] = useState<IWorkout[]>([]);
 
+  // Add workout to today's plan
   const addToPlan = (workout: IWorkout) => {
     setPlan((prev) => {
-     
       if (prev.some((item) => item.id === workout.id)) {
         return prev;
       }
@@ -38,17 +46,40 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
+  // Remove workout from today's plan
   const removeFromPlan = (id: number) => {
-    setPlan((prev) => prev.filter((item) => item.id !== id));
+    setPlan((prev) =>
+      prev.filter((item) => item.id !== id)
+    );
+  };
+
+  // Save workout
+  const addToSaved = (workout: IWorkout) => {
+    setSaved((prev) => {
+      if (prev.some((item) => item.id === workout.id)) {
+        return prev;
+      }
+
+      return [...prev, workout];
+    });
+  };
+
+  // Remove saved workout
+  const removeFromSaved = (id: number) => {
+    setSaved((prev) =>
+      prev.filter((item) => item.id !== id)
+    );
   };
 
   return (
     <PlanContext.Provider
       value={{
         plan,
-        setPlan,
+        saved,
         addToPlan,
         removeFromPlan,
+        addToSaved,
+        removeFromSaved,
       }}
     >
       {children}
@@ -60,7 +91,9 @@ export const usePlan = () => {
   const context = useContext(PlanContext);
 
   if (!context) {
-    throw new Error("usePlan must be used inside PlanProvider");
+    throw new Error(
+      "usePlan must be used inside PlanProvider"
+    );
   }
 
   return context;
