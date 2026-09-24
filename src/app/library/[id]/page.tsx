@@ -152,7 +152,7 @@ const LibraryDetailsPage = async ({ params }: workoutdetailsType) => {
                                 <line x1="3" y1="10" x2="21" y2="10" />
                                 <path d="M12 14v4M10 16h4" />
                             </svg>
-                            <span>Add to today's plan</span>
+                            <span>Add to today`s plan</span>
                         </button>
 
                         <button className="flex items-center gap-2 bg-transparent hover:bg-gray-800/50 border border-gray-800 hover:border-gray-700 text-gray-300 font-semibold text-[14px] px-4 py-2.5 rounded-xl transition-all active:scale-95">
