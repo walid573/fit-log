@@ -336,7 +336,7 @@ const MyPlanPage = () => {
     removeFromPlan(id);
 
     if (workout) {
-      toast.success(
+      toast.error(
         `${workout.name} removed from today's plan.`
       );
     }
@@ -354,7 +354,7 @@ const MyPlanPage = () => {
     removeFromSaved(id);
 
     if (workout) {
-      toast.success(
+      toast.error(
         `${workout.name} removed from saved workouts.`
       );
     }
