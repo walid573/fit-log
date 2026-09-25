@@ -4,6 +4,7 @@ import React from "react";
 import { usePlan } from "@/app/contexts/PlanContext";
 import { IWorkout } from "@/app/types/type";
 import { toast } from "react-toastify";
+import { CalendarPlus } from "lucide-react";
 
 interface AddToPlanButtonProps {
   workout: IWorkout;
@@ -46,7 +47,12 @@ const AddToPlanButton = ({
       }`}
     >
       <span>
-        {alreadyAdded ? "Added" : "Add to Plan"}
+        {alreadyAdded ?( "Added" ): (
+          <div className="flex gap-1 items-center">
+          <CalendarPlus size={18} strokeWidth={2.5} />
+        <span>Add to Plan</span>
+          </div>
+        )}
       </span>
     </button>
   );

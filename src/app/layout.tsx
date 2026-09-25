@@ -25,9 +25,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased bg-black`}
     >
-      <body className="min-h-full flex flex-col bg-[#000000] dark:text-white">
+      <body className="min-h-full flex flex-col  dark:text-white">
         <PlanProvider>
         <Navbar></Navbar>
 

@@ -4,6 +4,7 @@ import React from "react";
 import { usePlan } from "@/app/contexts/PlanContext";
 import { IWorkout } from "@/app/types/type";
 import { toast } from "react-toastify";
+import { Bookmark } from "lucide-react";
 
 interface AddToSaveButtonProps {
   workout: IWorkout;
@@ -36,19 +37,15 @@ const AddToSaveButton = ({
       disabled={alreadySaved}
       className={`flex items-center gap-2 border font-semibold text-[14px] px-4 py-2.5 rounded-xl transition-all ${
         alreadySaved
-          ? "bg-[#232732] border-[#CCFF00] text-[#CCFF00] cursor-not-allowed"
+          ? "bg-[#232732]   cursor-not-allowed"
           : "bg-transparent border-gray-800 text-gray-300 hover:bg-gray-800/50"
       }`}
     >
-      <svg
-        className="w-4 h-4"
-        fill={alreadySaved ? "currentColor" : "none"}
-        stroke="currentColor"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
-      >
-        <path d="M19 21l-7-5-7 5V5a2 2 0 0 0-2-2h10a2 2 0 0 1 2 2v16z" />
-      </svg>
+      <Bookmark
+  size={18}
+  strokeWidth={2}
+  fill={alreadySaved ? "currentColor" : "none"}
+/>
 
       <span>
         {alreadySaved ? "Saved" : "Save for later"}

@@ -111,7 +111,8 @@ const MyPlanPage = () => {
       <div className="mt-8 pb-2 border-b border-[#232732] flex justify-between items-center">
         <div>
           <div className="flex gap-8">
-            <button
+            <Link
+              href='/my-plan?tab=plan'
               onClick={() => setActiveTab("today")}
               className={`pb-3 font-semibold ${activeTab === "today"
                 ? "text-[#CCFF00] border-b-2 border-[#CCFF00]"
@@ -119,9 +120,9 @@ const MyPlanPage = () => {
                 }`}
             >
               Today&apos;s Plan
-            </button>
+            </Link>
 
-            <button
+            <Link href='/my-plan?tab=saved'
               onClick={() => setActiveTab("saved")}
               className={`pb-3 font-semibold ${activeTab === "saved"
                 ? "text-[#CCFF00] border-b-2 border-[#CCFF00]"
@@ -129,7 +130,7 @@ const MyPlanPage = () => {
                 }`}
             >
               Saved
-            </button>
+            </Link>
           </div>
         </div>
         <div className="flex  items-center gap-2">

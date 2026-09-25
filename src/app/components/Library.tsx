@@ -25,7 +25,7 @@ const Library = async() => {
         <section id="library" className='py-16 px-6'>
             <h2 className='text-[30px] font-bold font-oswald'>THE LIBRARY</h2>
             <p className='text-[#9CA3AF] text-[14px] font-inter'>Twelve lifts covering every major muscle group.</p>
-            <div className='grid grid-cols-3  gap-8 mt-6'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-8 mt-6'>
                 {
                     workouts.map((workout: IWorkout,index:number) => <LibraryCard key={index} workout={workout}></LibraryCard>)
                 }

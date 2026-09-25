@@ -30,46 +30,46 @@ const LibraryDetailsPage = async ({ params }: workoutdetailsType) => {
         (work: IWorkout) => String(work.id) === String(id)
     );
 
-  
+
     return (
 
 
         <div className="w-full mx-auto   text-white p-6 md:p-8  border border-gray-800/60 shadow-2xl">
             <Link
                 href="/"
-                className="mb-8 inline-flex items-center gap-2 font-semibold text-slate-500 transition hover:text-emerald-600"
+                className="mb-8 inline-flex items-center gap-2 font-semibold text-[#CCFF00] transition hover:text-[#cdf52b83]"
             >
                 ← Back to Home
             </Link>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center w-[80%] mx-auto">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
 
-    
+
                 <div className=" rounded-xl ">
                     <Image
                         src={workout.image}
                         alt={workout.name || "Workout Image"}
                         width={588}
                         height={773}
+                        className="w-full h-full object-cover rounded-2xl border border-[#222630]"
                         priority
-                        className="object-cover rounded-xl"
-                        
+
                     />
                 </div>
 
-    
+
                 <div className="flex flex-col justify-between h-full">
                     <div>
- 
-                        <h1 className="text-4xl md:text-3xl font-black font-oswald tracking-wide uppercase text-white">
+
+                        <h1 className="text-xl md:text-2xl lg:text-3xl font-black font-oswald tracking-wide uppercase text-white">
                             {workout.name}
                         </h1>
-                        <p className="text-xs md:text-sm font-inter text-[#9CA3AF] mt-2 leading-relaxed">
+                        <p className="text-[10px] md:text-sm font-inter text-[#9CA3AF] mt-2 leading-relaxed">
                             {workout.description}
                         </p>
 
-               
-                        <div className="flex items-center gap-2 mt-4">
-                            {workout.muscleGroups?.map((group:string, idex:number) => (
+
+                        <div className="flex items-center gap-2 mt-3 md:mt-4">
+                            {workout.muscleGroups?.map((group: string, idex: number) => (
                                 <span
                                     key={idex}
                                     className="px-3 py-1 bg-[#CCFF00] text-black text-[12px] font-semibold  tracking-wider uppercase rounded-full"
@@ -79,7 +79,7 @@ const LibraryDetailsPage = async ({ params }: workoutdetailsType) => {
                             ))}
                         </div>
 
-              
+
                         <div className="bg-[#12141c] border border-gray-800/80 rounded-2xl p-4 mt-6 divide-y divide-gray-800/60">
                             <div className="flex justify-between items-center py-2 text-xs">
                                 <span className="text-[#9CA3AF] font-bold uppercase tracking-wider text-[12px]">
@@ -136,7 +136,7 @@ const LibraryDetailsPage = async ({ params }: workoutdetailsType) => {
                                 INSTRUCTIONS
                             </h3>
                             <ol className="space-y-2">
-                                {workout.instructions?.map((step:number, idx:number) => (
+                                {workout.instructions?.map((step: number, idx: number) => (
                                     <li key={idx} className="flex gap-2 text-[14px] text-[#D1D5DB] leading-relaxed">
                                         <span className="text-gray-500 font-bold select-none">{idx + 1}.</span>
                                         <span>{step}</span>
@@ -146,7 +146,7 @@ const LibraryDetailsPage = async ({ params }: workoutdetailsType) => {
                         </div>
                     </div>
 
-                    
+
                     <div className="flex items-center gap-3 mt-8">
                         <AddToPlanButton workout={workout}></AddToPlanButton>
                         <AddToSaveButton workout={workout}></AddToSaveButton>
