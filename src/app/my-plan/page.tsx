@@ -5,11 +5,28 @@ import React, { useState } from "react";
 import { usePlan } from "../contexts/PlanContext";
 import Image from "next/image";
 
+import { useSearchParams } from "next/navigation";
+
 
 const MyPlanPage = () => {
-  const { plan, removeFromPlan } = usePlan();
+  const {
+    plan,
+    saved,
+    addToPlan,
+    markAsDone,
+    removeFromPlan,
+    removeFromSaved,
+  } = usePlan();
 
-  const [activeTab, setActiveTab] = useState<"today" | "saved">("today");
+  const searchParams = useSearchParams();
+
+  const [activeTab, setActiveTab] = useState<"today" | "saved">(
+    searchParams.get("tab") === "saved" ? "saved" : "today"
+  );
+  
+  const [sortBy, setSortBy] = useState<
+    "duration" | "calories" | "rating"
+  >("duration");
 
   const exercises = plan.length;
 
@@ -21,6 +38,26 @@ const MyPlanPage = () => {
   const calories = plan.reduce(
     (total, workout) => total + workout.caloriesBurned,
     0
+  );
+  const workoutsToDisplay =
+    activeTab === "today" ? plan : saved;
+
+  const sortedWorkouts = [...workoutsToDisplay].sort(
+    (a, b) => {
+      if (sortBy === "rating") {
+        return b.rating - a.rating;
+      }
+
+      if (sortBy === "calories") {
+        return b.caloriesBurned - a.caloriesBurned;
+      }
+
+      if (sortBy === "duration") {
+        return b.duration - a.duration;
+      }
+
+      return 0;
+    }
   );
 
   return (
@@ -81,7 +118,7 @@ const MyPlanPage = () => {
                 : "text-[#8A92A0]"
                 }`}
             >
-              Today's Plan
+              Today&apos;s Plan
             </button>
 
             <button
@@ -96,26 +133,30 @@ const MyPlanPage = () => {
           </div>
         </div>
         <div className="flex  items-center gap-2">
+          <div> <h2 className="text-[12px] text-[#8A92A0]">Sort by</h2> </div>
           <div>
-          <h2>Sort by</h2>
-
+            <select
+              value={sortBy}
+              onChange={(e) =>
+                setSortBy(
+                  e.target.value as "duration" | "calories" | "rating"
+                )
+              }
+              className="select appearance-none"
+            >
+              <option value="duration">Duration</option>
+              <option value="calories">Calories</option>
+              <option value="rating">Rating</option>
+            </select>
           </div>
-          <div>
 
-          <select defaultValue="Duration" className="select appearance-none">
-            <option disabled={true}>Sort by</option>
-            <option>Duration</option>
-            <option>Calories</option>
-            <option>Rating</option>
-          </select>
-          </div>
         </div>
 
       </div>
 
 
       {activeTab === "today" && (
-        <div className="mt-6">
+        <div className="mt-6 mb-4">
           {plan.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-30 text-center rounded-xl border-2 border-dotted border-[#FFFFFF]/10">
               <h2 className="font-oswald text-[20px] font-bold">
@@ -135,7 +176,7 @@ const MyPlanPage = () => {
             </div>
           ) : (
             <div className="space-y-4">
-              {plan.map((workout) => (
+              {sortedWorkouts.map((workout) => (
                 <div
                   key={workout.id}
                   className="bg-[#232732]/60 rounded-2xl p-4 pr-10 flex gap-5 items-center"
@@ -143,10 +184,10 @@ const MyPlanPage = () => {
 
                   <Image src={workout.image}
                     alt={workout.name}
-                    width={200}
-                    height={10}
+                    width={130}
+                    height={80}
                     className=" object-cover rounded-xl">
-                    
+
                   </Image>
 
                   <div className="flex-1">
@@ -183,9 +224,10 @@ const MyPlanPage = () => {
                     </Link>
 
                     <button
-                      className="bg-[#CCFF00] text-black px-4 py-2 rounded-full text-sm font-semibold"
+                      onClick={() => markAsDone(workout.id)}
+                      className="bg-[#CCFF00] text-black px-4 py-2 rounded-full text-sm font-semibold hover:bg-[#b8e600] transition"
                     >
-                     ✓ Mark as Done
+                      ✓ Mark as Done
                     </button>
 
                     <button
@@ -202,9 +244,13 @@ const MyPlanPage = () => {
         </div>
       )}
 
-
       {activeTab === "saved" && (
-         <div className="flex flex-col items-center justify-center mt-6 py-30 text-center rounded-xl border-2 border-dotted border-[#FFFFFF]/10">
+        <div className="mt-6 mb-4">
+
+          {saved.length === 0 ? (
+
+            <div className="flex flex-col items-center justify-center py-30 text-center rounded-xl border-2 border-dotted border-[#FFFFFF]/10">
+
               <h2 className="font-oswald text-[20px] font-bold">
                 NOTHING HERE YET
               </h2>
@@ -219,9 +265,100 @@ const MyPlanPage = () => {
               >
                 Go to workouts
               </Link>
+
             </div>
-      )
-        }
+          ) : (
+
+            <div className="space-y-4">
+
+              {sortedWorkouts.map((workout) => (
+
+                <div
+                  key={workout.id}
+                  className="bg-[#232732]/60 rounded-2xl p-4 pr-10 flex gap-5 items-center"
+                >
+
+
+                  <Image
+                    src={workout.image}
+                    alt={workout.name}
+                    width={130}
+                    height={80}
+                    className=" object-cover rounded-xl"
+                  />
+
+
+                  <div className="flex-1">
+
+                    <h2 className="font-oswald text-xl font-bold">
+                      {workout.name}
+                    </h2>
+
+                    <p className="text-[#8A92A0] text-sm mt-1">
+                      {workout.equipment}
+                    </p>
+
+
+                    <div className="flex gap-5 mt-3 text-sm text-[#8A92A0]">
+
+                      <span>
+                        ⏱ {workout.duration} min
+                      </span>
+
+                      <span>
+                        🔥 {workout.caloriesBurned} kcal
+                      </span>
+
+                      <span>
+                        ★ {workout.rating}
+                      </span>
+
+                    </div>
+
+                  </div>
+
+
+                  <div className="flex flex-row gap-3 items-center">
+
+                    <Link
+                      href={`/workouts/${workout.id}`}
+                      className="border border-[#3A404C] px-5 py-2 rounded-full text-sm text-center"
+                    >
+                      View Details
+                    </Link>
+
+                    <button
+                      onClick={() => addToPlan(workout)}
+                      disabled={plan.some((item) => item.id === workout.id)}
+                      className={`px-4 py-2 rounded-full text-sm font-semibold transition ${plan.some((item) => item.id === workout.id)
+                        ? "bg-[#232732] text-[#8A92A0] cursor-not-allowed"
+                        : "bg-[#CCFF00] text-black hover:bg-[#b8e600]"
+                        }`}
+                    >
+                      {plan.some((item) => item.id === workout.id)
+                        ? "Added"
+                        : "Add to Plan"}
+                    </button>
+
+
+                    <button
+                      onClick={() => removeFromSaved(workout.id)}
+                      className="text-[#6B7280] text-xl hover:text-red-400"
+                    >
+                      ✕
+                    </button>
+
+                  </div>
+
+                </div>
+
+              ))}
+
+            </div>
+          )}
+
+        </div>
+      )}
     </main>
   );
 };

@@ -14,7 +14,7 @@ interface PlanContextType {
 
   addToPlan: (workout: IWorkout) => void;
   removeFromPlan: (id: number) => void;
-
+  markAsDone: (id: number) => void;
   addToSaved: (workout: IWorkout) => void;
   removeFromSaved: (id: number) => void;
 }
@@ -53,6 +53,12 @@ export const PlanProvider = ({
     );
   };
 
+   // Mark workout as completed
+  const markAsDone = (id: number) => {
+    setPlan((prev) =>
+      prev.filter((item) => item.id !== id)
+    );
+  };
   // Save workout
   const addToSaved = (workout: IWorkout) => {
     setSaved((prev) => {
@@ -78,6 +84,7 @@ export const PlanProvider = ({
         saved,
         addToPlan,
         removeFromPlan,
+        markAsDone,
         addToSaved,
         removeFromSaved,
       }}

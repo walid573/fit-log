@@ -43,7 +43,7 @@ const LibraryDetailsPage = async ({ params }: workoutdetailsType) => {
             </Link>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center w-[80%] mx-auto">
 
-                {/* Left Column: Image */}
+    
                 <div className=" rounded-xl ">
                     <Image
                         src={workout.image}
@@ -56,10 +56,10 @@ const LibraryDetailsPage = async ({ params }: workoutdetailsType) => {
                     />
                 </div>
 
-                {/* Right Column: Details */}
+    
                 <div className="flex flex-col justify-between h-full">
                     <div>
-                        {/* Header Title & Description */}
+ 
                         <h1 className="text-4xl md:text-3xl font-black font-oswald tracking-wide uppercase text-white">
                             {workout.name}
                         </h1>
@@ -79,7 +79,7 @@ const LibraryDetailsPage = async ({ params }: workoutdetailsType) => {
                             ))}
                         </div>
 
-                        {/* Stats Table Card */}
+              
                         <div className="bg-[#12141c] border border-gray-800/80 rounded-2xl p-4 mt-6 divide-y divide-gray-800/60">
                             <div className="flex justify-between items-center py-2 text-xs">
                                 <span className="text-[#9CA3AF] font-bold uppercase tracking-wider text-[12px]">
@@ -131,7 +131,6 @@ const LibraryDetailsPage = async ({ params }: workoutdetailsType) => {
                             </div>
                         </div>
 
-                        {/* Instructions Section */}
                         <div className="mt-6">
                             <h3 className="text-[16px] font-bold font-inter uppercase tracking-wider text-white mb-3">
                                 INSTRUCTIONS
@@ -147,7 +146,7 @@ const LibraryDetailsPage = async ({ params }: workoutdetailsType) => {
                         </div>
                     </div>
 
-                    {/* Bottom Action Buttons */}
+                    
                     <div className="flex items-center gap-3 mt-8">
                         <AddToPlanButton workout={workout}></AddToPlanButton>
                         <AddToSaveButton workout={workout}></AddToSaveButton>
