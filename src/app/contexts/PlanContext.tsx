@@ -5,7 +5,7 @@ import {
   createContext,
   ReactNode,
   useContext,
-  useState,
+  useSyncExternalStore,
 } from "react";
 
 interface PlanContextType {
@@ -15,6 +15,7 @@ interface PlanContextType {
   addToPlan: (workout: IWorkout) => void;
   removeFromPlan: (id: number) => void;
   markAsDone: (id: number) => void;
+
   addToSaved: (workout: IWorkout) => void;
   removeFromSaved: (id: number) => void;
 }
@@ -23,57 +24,106 @@ const PlanContext = createContext<PlanContextType | undefined>(
   undefined
 );
 
+const PLAN_KEY = "fitlog-plan";
+const SAVED_KEY = "fitlog-saved";
+
+const emptyData = "[]";
+
+const subscribe = (callback: () => void) => {
+  window.addEventListener("fitlog-storage", callback);
+  window.addEventListener("storage", callback);
+
+  return () => {
+    window.removeEventListener("fitlog-storage", callback);
+    window.removeEventListener("storage", callback);
+  };
+};
+
+const getPlanSnapshot = () => {
+  return localStorage.getItem(PLAN_KEY) ?? emptyData;
+};
+
+const getSavedSnapshot = () => {
+  return localStorage.getItem(SAVED_KEY) ?? emptyData;
+};
+
+const getServerSnapshot = () => {
+  return emptyData;
+};
+
 export const PlanProvider = ({
   children,
 }: {
   children: ReactNode;
 }) => {
-  const [plan, setPlan] = useState<IWorkout[]>([]);
-  const [saved, setSaved] = useState<IWorkout[]>([]);
+  const planData = useSyncExternalStore(
+    subscribe,
+    getPlanSnapshot,
+    getServerSnapshot
+  );
 
-  // Add workout to today's plan
+  const savedData = useSyncExternalStore(
+    subscribe,
+    getSavedSnapshot,
+    getServerSnapshot
+  );
+
+  const plan: IWorkout[] = JSON.parse(planData);
+  const saved: IWorkout[] = JSON.parse(savedData);
+
+  const updatePlan = (newPlan: IWorkout[]) => {
+    localStorage.setItem(
+      PLAN_KEY,
+      JSON.stringify(newPlan)
+    );
+
+    window.dispatchEvent(new Event("fitlog-storage"));
+  };
+
+  const updateSaved = (newSaved: IWorkout[]) => {
+    localStorage.setItem(
+      SAVED_KEY,
+      JSON.stringify(newSaved)
+    );
+
+    window.dispatchEvent(new Event("fitlog-storage"));
+  };
+
   const addToPlan = (workout: IWorkout) => {
-    setPlan((prev) => {
-      if (prev.some((item) => item.id === workout.id)) {
-        return prev;
-      }
+    if (plan.some((item) => item.id === workout.id)) {
+      return;
+    }
 
-      if (prev.length >= 5) {
-        return prev;
-      }
+    if (plan.length >= 5) {
+      return;
+    }
 
-      return [...prev, workout];
-    });
+    updatePlan([...plan, workout]);
   };
 
-  // Remove workout from today's plan
   const removeFromPlan = (id: number) => {
-    setPlan((prev) =>
-      prev.filter((item) => item.id !== id)
+    updatePlan(
+      plan.filter((item) => item.id !== id)
     );
   };
 
-   // Mark workout as completed
   const markAsDone = (id: number) => {
-    setPlan((prev) =>
-      prev.filter((item) => item.id !== id)
+    updatePlan(
+      plan.filter((item) => item.id !== id)
     );
   };
-  // Save workout
-  const addToSaved = (workout: IWorkout) => {
-    setSaved((prev) => {
-      if (prev.some((item) => item.id === workout.id)) {
-        return prev;
-      }
 
-      return [...prev, workout];
-    });
+  const addToSaved = (workout: IWorkout) => {
+    if (saved.some((item) => item.id === workout.id)) {
+      return;
+    }
+
+    updateSaved([...saved, workout]);
   };
 
-  // Remove saved workout
   const removeFromSaved = (id: number) => {
-    setSaved((prev) =>
-      prev.filter((item) => item.id !== id)
+    updateSaved(
+      saved.filter((item) => item.id !== id)
     );
   };
 

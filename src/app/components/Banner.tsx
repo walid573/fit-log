@@ -11,7 +11,7 @@ const Banner = () => {
                     <h1 className='text-[60px] leading-13 font-oswald font-extrabold max-w-[80%]'>TRAIN WITH INTENT. LOG
                         EVERY SET.</h1>
                     <p className='text-[#9CA3AF] text-[16px] py-2'>FitLog is a dark, no-nonsense gym companion: pick a lift, lock it <br />
-                        into today's plan, and watch the week's work add up.</p>
+                        into today&apos;s plan, and watch the week&apos;s work add up.</p>
                     <a href="#library" className='btn bg-[#C2F800] text-black font-inter font-bold px-6 py-3'>BROWSE WORKOUTS</a>
                     
                 </div>

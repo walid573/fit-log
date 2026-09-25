@@ -67,11 +67,11 @@ const LibraryDetailsPage = async ({ params }: workoutdetailsType) => {
                             {workout.description}
                         </p>
 
-                        {/* Muscle Group Badges */}
+               
                         <div className="flex items-center gap-2 mt-4">
-                            {workout.muscleGroups?.map((group, idx) => (
+                            {workout.muscleGroups?.map((group:string, idex:number) => (
                                 <span
-                                    key={idx}
+                                    key={idex}
                                     className="px-3 py-1 bg-[#CCFF00] text-black text-[12px] font-semibold  tracking-wider uppercase rounded-full"
                                 >
                                     {group}
@@ -136,7 +136,7 @@ const LibraryDetailsPage = async ({ params }: workoutdetailsType) => {
                                 INSTRUCTIONS
                             </h3>
                             <ol className="space-y-2">
-                                {workout.instructions?.map((step, idx) => (
+                                {workout.instructions?.map((step:number, idx:number) => (
                                     <li key={idx} className="flex gap-2 text-[14px] text-[#D1D5DB] leading-relaxed">
                                         <span className="text-gray-500 font-bold select-none">{idx + 1}.</span>
                                         <span>{step}</span>
