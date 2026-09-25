@@ -18,9 +18,7 @@ type ActiveTab = "today" | "saved";
 
 type SortBy = "duration" | "calories" | "rating";
 
-/* =========================================================
-   Workout Card
-========================================================= */
+
 
 interface WorkoutCardProps {
   workout: IWorkout;
@@ -108,7 +106,7 @@ const WorkoutCard = ({
         className="
           flex
           w-full
-          flex-wrap
+          flex-nowrap
           items-center
           gap-2
           sm:gap-3
@@ -116,7 +114,7 @@ const WorkoutCard = ({
           lg:flex-nowrap
         "
       >
-   
+
         <Link
           href={`/workouts/${workout.id}`}
           className="
@@ -139,7 +137,7 @@ const WorkoutCard = ({
           View Details
         </Link>
 
-      
+
         {activeTab === "today" && (
           <>
             <button
@@ -172,19 +170,7 @@ const WorkoutCard = ({
             <button
               type="button"
               onClick={() => onRemoveFromPlan(workout.id)}
-              className="
-                flex
-                h-9
-                w-9
-                shrink-0
-                items-center
-                justify-center
-                rounded-full
-                text-[#6B7280]
-                transition
-                hover:bg-red-500/10
-                hover:text-red-400
-              "
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[#6B7280] transition hover:bg-red-500/10 hover:text-red-400"
               aria-label={`Remove ${workout.name} from today's plan`}
             >
               <X size={19} />
@@ -192,7 +178,7 @@ const WorkoutCard = ({
           </>
         )}
 
-    
+
         {activeTab === "saved" && (
           <>
             <button
@@ -210,10 +196,9 @@ const WorkoutCard = ({
                 transition
                 sm:flex-none
                 sm:text-sm
-                ${
-                  alreadyAdded
-                    ? "cursor-not-allowed bg-[#232732] text-[#8A92A0]"
-                    : "bg-[#CCFF00] text-black hover:bg-[#b8e600]"
+                ${alreadyAdded
+                  ? "cursor-not-allowed bg-[#232732] text-[#8A92A0]"
+                  : "bg-[#CCFF00] text-black hover:bg-[#b8e600]"
                 }
               `}
             >
@@ -255,20 +240,7 @@ interface EmptyStateProps {
 const EmptyState = ({ activeTab }: EmptyStateProps) => {
   return (
     <div
-      className="
-        flex
-        flex-col
-        items-center
-        justify-center
-        rounded-xl
-        border-2
-        border-dotted
-        border-[#FFFFFF]/10
-        px-5
-        py-20
-        text-center
-        sm:py-28
-      "
+      className="flex        flex-col items-center justify-center rounded-xl   border-2   border-dotted    border-[#FFFFFF]/10  px-5  py-20  text-center sm:py-28"
     >
       <h2 className="font-oswald text-lg font-bold sm:text-xl">
         NOTHING HERE YET
@@ -282,20 +254,7 @@ const EmptyState = ({ activeTab }: EmptyStateProps) => {
 
       <Link
         href="/"
-        className="
-          mt-6
-          rounded-lg
-          bg-[#CCFF00]
-          px-5
-          py-3
-          text-sm
-          font-semibold
-          text-black
-          transition
-          hover:bg-[#b8e600]
-          sm:px-6
-          sm:text-base
-        "
+        className="mt-6 rounded-lg bg-[#CCFF00] px-5 py-3 text-sm font-semibold text-black transition hover:bg-[#b8e600] sm:px-6 sm:text-base"
       >
         Go to workouts
       </Link>
@@ -404,7 +363,7 @@ const MyPlanPage = () => {
 
   return (
     <main className="mt-6 w-full px-4 pb-10 sm:mt-8 sm:px-6 lg:mt-10 lg:px-10 xl:px-12">
-     
+
       <div>
         <h2 className="py-1 font-oswald text-2xl font-bold sm:text-[28px] lg:text-[30px]">
           MY PLAN
@@ -416,7 +375,7 @@ const MyPlanPage = () => {
       </div>
 
       <div className="mt-4 grid w-full grid-cols-1 gap-5 rounded-2xl bg-[#232732]/60 px-5 py-5 sm:grid-cols-3 sm:gap-0 sm:px-6 sm:py-7 lg:px-10">
-     
+
         <div className="px-1 sm:px-2">
           <h2 className="text-sm text-[#8A92A0] sm:text-base">
             Exercises
@@ -427,7 +386,7 @@ const MyPlanPage = () => {
           </p>
         </div>
 
- 
+
         <div className="px-1 sm:border-x-2 sm:border-[#232732] sm:pl-6">
           <h2 className="text-sm text-[#8A92A0] sm:text-base">
             Minutes
@@ -451,7 +410,7 @@ const MyPlanPage = () => {
 
 
       <div className="mt-6 flex flex-col gap-4 border-b border-[#232732] pb-2 sm:mt-8 sm:flex-row sm:items-center sm:justify-between">
-  
+
         <div className="w-full sm:w-auto">
           <div className="flex gap-5 overflow-x-auto sm:gap-8">
             <Link
@@ -463,10 +422,9 @@ const MyPlanPage = () => {
                 text-sm
                 font-semibold
                 sm:text-base
-                ${
-                  activeTab === "today"
-                    ? "border-b-2 border-[#CCFF00] text-[#CCFF00]"
-                    : "text-[#8A92A0]"
+                ${activeTab === "today"
+                  ? "border-b-2 border-[#CCFF00] text-[#CCFF00]"
+                  : "text-[#8A92A0]"
                 }
               `}
             >
@@ -482,10 +440,9 @@ const MyPlanPage = () => {
                 text-sm
                 font-semibold
                 sm:text-base
-                ${
-                  activeTab === "saved"
-                    ? "border-b-2 border-[#CCFF00] text-[#CCFF00]"
-                    : "text-[#8A92A0]"
+                ${activeTab === "saved"
+                  ? "border-b-2 border-[#CCFF00] text-[#CCFF00]"
+                  : "text-[#8A92A0]"
                 }
               `}
             >
@@ -525,7 +482,7 @@ const MyPlanPage = () => {
         </div>
       </div>
 
-   
+
       <div className="mb-4 mt-5 sm:mt-6">
         {workoutsToDisplay.length === 0 ? (
           <EmptyState activeTab={activeTab} />

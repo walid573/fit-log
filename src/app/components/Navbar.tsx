@@ -24,7 +24,7 @@ const Navbar = () => {
     'text-[#9CA3AF] px-4 py-2 rounded-full text-xs font-medium hover:text-white transition';
 
   return (
-    <nav className="w-full border-b border-[#222630] bg-[#0B0F0C] px-4 sm:px-6 lg:px-10 py-5">
+    <nav className="w-full border-b border-[#222630] bg-[#090A0D] px-4 sm:px-6 lg:px-10 py-5">
       <div className="flex items-center justify-between">
 
         <Link href="/" className="flex items-center gap-2.5">
