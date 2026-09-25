@@ -6,7 +6,7 @@ export default function NotFound() {
 
            <main className="flex-1 flex flex-col items-center justify-center text-center px-4 relative overflow-hidden py-16 my-auto">
   
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-[#CCFF00]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-linear-to-r from-[#CCFF00]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
         <h1 className="text-8xl md:text-9xl font-black tracking-tighter text-[#1E2330] mb-2 select-none">
           404
@@ -19,7 +19,7 @@ export default function NotFound() {
 
 
         <p className="text-gray-400 text-sm md:text-base max-w-md mx-auto mb-8 font-medium leading-relaxed">
-          The workout routine or page you are trying to access doesn't exist or has been moved out of the library.
+          The workout routine or page you are trying to access doesn&apos;t exist or has been moved out of the library.
         </p>
 
         <Link
