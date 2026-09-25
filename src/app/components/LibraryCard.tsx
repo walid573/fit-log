@@ -9,7 +9,7 @@ export interface LibraryCardProps {
 export default function LibraryCard({ workout }: LibraryCardProps) {
 
     return (
-        <Link href={`/library/${workout.id}`}>
+        <Link href={`/workouts/${workout.id}`}>
         <section className="w-full max-w-150 bg-[#12141a] border border-gray-800/80 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:border-gray-700">
 
             <div className="relative w-full h-66 overflow-hidden">

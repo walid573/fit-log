@@ -4,8 +4,11 @@ import Image from 'next/image';
 import NavLogo from '../assets/logo.png'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { usePlan } from '../contexts/PlanContext';
 
 const Navbar = () => {
+    const { plan } = usePlan();
+    const exercises = plan.length;
     const pathname = usePathname();
     const activeStyle =
         "bg-[#1A2312] text-[#C2F800] border outline-none border-transparent px-6 py-2 rounded-full text-xs font-medium";
@@ -36,7 +39,7 @@ const Navbar = () => {
                 </Link>
             </div>
             <div className='flex justify-around items-center gap-3'>
-                <Link href='/my-plan' className='font-inter text-[#D1D5DB] text-[12px]'>Plan  <span className='text-black rounded-full bg-[#C2F800] px-2 py-1 ml-1'>0</span></Link>
+                <Link href='/my-plan' className='font-inter text-[#D1D5DB] text-[12px]'>Plan  <span className='text-black rounded-full bg-[#C2F800] text-[11px] font-bold px-2 py-1 ml-1'>{exercises}</span></Link>
                 <Link href='/my-plan' className='font-inter text-[#D1D5DB] text-[12px]'>Saved <span className='text-white border border-[#9CA3AF]/60 rounded-full bg-transparent px-2 py-1 ml-1'>0</span></Link>
             </div>
         </section>
