@@ -1,36 +1,162 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏋️ FitLog — Workout Library
 
-## Getting Started
+> **Train with intent. Log every set.**
 
-First, run the development server:
+FitLog is a modern, responsive workout library and workout planning application designed to help users discover exercises, build a daily workout plan, save workouts for later, and track their progress.
+
+The application provides a clean dark-themed interface with workout cards, detailed exercise information, daily planning, saved workouts, sorting, toast notifications, and persistent client-side state.
+
+---
+
+## 🔗 Live Demo
+
+**Live Website:** [Add your deployed website URL here]
+
+---
+
+
+## 🛠️ Technologies Used
+
+| Technology          | Purpose                                  |
+| ------------------- | ---------------------------------------- |
+| **Next.js**         | React framework and routing              |
+| **React**           | Building the user interface              |
+| **TypeScript**      | Type-safe development                    |
+| **Tailwind CSS**    | Styling and responsive design            |
+| **React Toastify**  | Toast notifications                      |
+| **Lucide React**    | UI icons                                 |
+| **Next/Image**      | Optimized image rendering                |
+| **Context API**     | Global workout plan and saved state      |
+| **Local Storage**   | Persisting workout data across refreshes |
+| **REST API / JSON** | Workout data                             |
+
+---
+
+
+## ⚡ Loading & Error Handling
+
+FitLog includes:
+
+* Workout data loading animation
+* Loading state on the My Plan page
+* Custom 404 page
+* Error-safe routing
+* Responsive empty states
+* Toast feedback for user actions
+
+Example loading message:
+
+```text
+Loading workouts…
+```
+
+Example empty state:
+
+```text
+NOTHING HERE YET
+
+Browse the library and add a lift to get today moving.
+```
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone YOUR_REPOSITORY_URL
+```
+
+### 2. Navigate into the project
+
+```bash
+cd fitlog
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 5. Open the application
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📦 Build for Production
 
-To learn more about Next.js, take a look at the following resources:
+Create a production build:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Then start the production server:
 
-## Deploy on Vercel
+```bash
+npm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## 📂 Project Structure
+
+A simplified project structure:
+
+```text
+fitlog/
+│
+├── app/
+│   ├── components/
+│   ├── contexts/
+│   ├── types/
+│   ├── workout/
+│   │   └── [id]/
+│   ├── my-plan/
+│   ├── page.tsx
+│   ├── not-found.tsx
+│   └── layout.tsx
+│
+├── public/
+│   └── workout-data.json
+│
+├── assets/
+│
+├── package.json
+├── tsconfig.json
+├── next.config.ts
+└── README.md
+```
+
+
+
+---
+
+## 👨‍💻 Author
+
+**Mohammad Walid**
+
+Frontend / Web Development Learner
+
+Focused on building modern, responsive, and user-friendly web applications with React, Next.js, TypeScript, and Tailwind CSS.
+
+---
+
+## ⭐ Support
+
+If you find this project useful or interesting, consider giving the repository a ⭐ on GitHub.
+
+
+
