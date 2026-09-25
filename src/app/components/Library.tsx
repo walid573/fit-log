@@ -22,7 +22,7 @@ const Library = async() => {
     console.log("workouts" , workouts);
     
     return (
-        <section className='py-16 px-6'>
+        <section id="library" className='py-16 px-6'>
             <h2 className='text-[30px] font-bold font-oswald'>THE LIBRARY</h2>
             <p className='text-[#9CA3AF] text-[14px] font-inter'>Twelve lifts covering every major muscle group.</p>
             <div className='grid grid-cols-3  gap-8 mt-6'>
