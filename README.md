@@ -10,10 +10,21 @@ The application provides a clean dark-themed interface with workout cards, detai
 
 ## 🔗 Live Demo
 
-**Live Website:** [Add your deployed website URL here]
+**Live Website:** [https://fit-log-jade.vercel.app/]
 
 ---
+## ✨ Features
 
+- 🏋️ Browse a responsive workout library
+- 📋 Build a daily workout plan
+- 🔖 Save workouts for later
+- 📊 Track workout minutes and calories
+- 🔔 Toast notifications for workout actions
+- 💾 Persistent plan and saved data using localStorage
+- 🔃 Sort workouts by duration, calories, or rating
+- 📱 Fully responsive design for mobile, tablet, and desktop
+
+---
 
 ## 🛠️ Technologies Used
 
